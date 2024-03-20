@@ -7,9 +7,11 @@ namespace Player
     {
         [SerializeField ] private float speed;
         private Rigidbody2D body;
-        private Animator anim;
+        public Animator anim;
 
         private bool flipplayer = true;
+
+        public bool isJumping = false;
         
 
         private void Awake()
@@ -38,9 +40,10 @@ namespace Player
         //jump
             if (Input.GetKey(KeyCode.Space))
                 body.velocity = new Vector2(body.velocity.x, speed);
+            isJumping = false;
             
         //set the animation parameters  
-           // anim.SetBool("walk", horizontalInput !=0 );
+            anim.SetFloat("walk", MathF.Abs(horizontalInput));
         }
         //flipplayer
         void flip()
